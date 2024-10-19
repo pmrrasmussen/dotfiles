@@ -34,8 +34,10 @@ return {
             --               -- the current file is changed while the tree is open.
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
-          never_show_by_pattern = {
-            "**/.DS_Store"
+          filtered_items = {
+            never_show = {
+              ".DS_Store"
+            },
           },
         },
         window = {
