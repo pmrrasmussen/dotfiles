@@ -2,7 +2,7 @@ return {
   -- Telescope (fuzzy file search)
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 
+    dependencies = {
       'nvim-lua/plenary.nvim'
     },
     defaults = {
@@ -16,6 +16,14 @@ return {
       vim.keymap.set({ "n", "v" }, '<leader>g', builtin.live_grep, { desc = 'Telescope live grep' })
       vim.keymap.set({ "n", "v" }, '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
       -- vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tags' })
+    end,
+  },
+  -- Telescope tmux (telescope extension for tmux)
+  {
+    "camgraff/telescope-tmux.nvim",
+    config = function()
+      vim.keymap.set('n', '<Leader>ts', ':Telescope tmux sessions<CR>', { desc = 'Search tmux sessions' })
+      vim.keymap.set('n', '<Leader>tw', ':Telescope tmux windows<CR>', { desc = 'Search tmux windows' })
     end,
   },
   -- NeoTree (file explorer)
@@ -69,7 +77,6 @@ return {
       vim.keymap.set({ "n", "v" }, "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
 		end,
 	},
-
   -- tmux navigator (integration between nvim and tmux pane navigation)
   {
     "christoomey/vim-tmux-navigator",

@@ -7,3 +7,6 @@ o.shiftwidth = 2 -- spaces per indentation levelw
 
 o.ignorecase = true
 o.smartcase = true
+
+-- vim.api.nvim_exec('language en_US', true)
+
