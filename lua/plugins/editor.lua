@@ -68,8 +68,13 @@ return {
       end
     end,
   },
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
   -- noice (overlay status line)
- {
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
@@ -87,7 +92,7 @@ return {
   -- Tokyonight (colour scheme)
   {
     "folke/tokyonight.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require('tokyonight').setup({
@@ -138,7 +143,8 @@ return {
           theme = "tokyonight",
         },
         sections = {
-          lualine_x = { },
+          lualine_x = {},
+          lualine_c = { { 'filename', path = 3 } },
         },
       })
     end,
@@ -148,7 +154,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function ()
+    config = function()
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
