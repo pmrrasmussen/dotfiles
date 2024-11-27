@@ -464,6 +464,13 @@ require("lazy").setup({
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", opts = {} },
 
+			{
+				"windwp/nvim-autopairs",
+				event = "InsertEnter",
+				config = true,
+				-- use opts = {} for passing setup options
+				-- this is equivalent to setup({}) function
+			},
 			-- Allows extra capabilities provided by nvim-cmp
 			"hrsh7th/cmp-nvim-lsp",
 		},
@@ -763,8 +770,9 @@ require("lazy").setup({
 			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			luasnip.config.setup({})
-
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -794,7 +802,7 @@ require("lazy").setup({
 
 					-- If you prefer more traditional completion keymaps,
 					-- you can uncomment the following lines
-					--['<CR>'] = cmp.mapping.confirm { select = true },
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					--['<Tab>'] = cmp.mapping.select_next_item(),
 					--['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
