@@ -6,6 +6,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 plugins=(
   git
   zsh-bat
+  zsh-syntax-highlighting
 )
 
 export ZSH_THEME="robbyrussell"
