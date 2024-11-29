@@ -1,14 +1,29 @@
 local o = vim.o
 
-o.expandtab = true
-o.smartindent = true -- syntax aware indentations for newline inserts
-o.tabstop = 2        -- num of space characters per tab
-o.shiftwidth = 2     -- spaces per indentation levelw
-o.relativenumber = true
-o.scrolloff = 999
+-- Info
 o.shortmess = "I"
 
+-- Experience
+o.mouse = "a"
+o.updatetime = 250
+o.scrolloff = 15
+vim.opt.cursorline = true
+
+-- Editing
+o.undofile = true
+o.expandtab = true
+o.tabstop = 2
+o.shiftwidth = 2
+o.smartindent = true
+
+-- Margins
+o.signcolumn = "yes"
+o.number = true
+o.relativenumber = true
+
+-- Search
 o.ignorecase = true
 o.smartcase = true
 
+-- Colorscheme
 vim.cmd.colorscheme("tokyonight")

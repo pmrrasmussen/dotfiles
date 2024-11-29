@@ -41,6 +41,10 @@ alias p="poetry run nvim ."
 alias t="tmux a -t"
 alias vlogin="vault login -method=oidc"
 
+function whoisblocking {
+  lsof -i "tcp:${1}"
+}
+
 export PATH="/usr/local/share/dotnet:$PATH"
 export DOTNET_ROOT="/usr/share/dotnet"
 
