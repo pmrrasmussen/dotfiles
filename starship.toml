@@ -1,0 +1,10 @@
+# Define the order and format of the information in our prompt
+format = """
+$directory\
+$git_branch
+$shell\
+$character"""
+
+# Customize the format of the working directory
+[directory]
+truncate_to_repo = true
