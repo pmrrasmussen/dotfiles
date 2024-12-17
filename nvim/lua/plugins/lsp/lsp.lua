@@ -1,3 +1,27 @@
+local pos_equal = function(p1, p2)
+	local r1, c1 = unpack(p1)
+	local r2, c2 = unpack(p2)
+	return r1 == r2 and c1 == c2
+end
+
+local goto_next_error_then_hint = function()
+	local pos = vim.api.nvim_win_get_cursor(0)
+	vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR, wrap = true })
+	local pos2 = vim.api.nvim_win_get_cursor(0)
+	if pos_equal(pos, pos2) then
+		vim.diagnostic.goto_next({ wrap = true })
+	end
+end
+
+local goto_prev_error_then_hint = function()
+	local pos = vim.api.nvim_win_get_cursor(0)
+	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR, wrap = true })
+	local pos2 = vim.api.nvim_win_get_cursor(0)
+	if pos_equal(pos, pos2) then
+		vim.diagnostic.goto_prev({ wrap = true })
+	end
+end
+
 return {
 	-- Main LSP Configuration
 	"neovim/nvim-lspconfig",
@@ -94,6 +118,9 @@ return {
 				--  For example, in C this would take you to the header.
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+				map("gj", goto_next_error_then_hint, "[G]oto next diagnostics error")
+				map("gk", goto_prev_error_then_hint, "[G]oto previous diagnostics error")
+
 				-- The following two autocommands are used to highlight references of the
 				-- word under your cursor when your cursor rests there for a little while.
 				--    See `:help CursorHold` for information about when this is executed
@@ -164,6 +191,8 @@ return {
 			gopls = {},
 			pyright = {},
 			ruff = {},
+			csharp_ls = {},
+			yamlls = {},
 			-- rust_analyzer = {},
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 			--

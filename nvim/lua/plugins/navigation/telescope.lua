@@ -5,15 +5,9 @@ return {
 		"nvim-lua/plenary.nvim",
 	},
 	keys = {
-		{ "<leader>f", require("telescope.builtin").find_files, mode = { "n", "v" }, desc = "Telescope find files" },
-		{ "<leader>g", require("telescope.builtin").live_grep, mode = { "n", "v" }, desc = "Telescope live grep" },
-		{ "<leader>b", require("telescope.builtin").buffers, mode = { "n", "v" }, desc = "Telescope buffers" },
-		{
-			"<leader>r",
-			require("telescope.builtin").lsp_references,
-			mode = { "n", "v" },
-			desc = "Telescope lsp references",
-		},
+		-- { "<leader>sf", require("telescope.builtin").find_files, mode = { "n", "v" }, desc = "Telescope find files" },
+		-- { "<leader>sg", require("telescope.builtin").live_grep, mode = { "n", "v" }, desc = "Telescope live grep" },
+		-- { "<leader>sb", require("telescope.builtin").buffers, mode = { "n", "v" }, desc = "Telescope buffers" },
 	},
 	opts = {
 		defaults = {

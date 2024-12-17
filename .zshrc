@@ -10,6 +10,7 @@ plugins=(
 )
 
 export ZSH_THEME="robbyrussell"
+export BAT_THEME="Solarized (dark)"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -40,6 +41,7 @@ alias v="nvim ."
 alias p="poetry run nvim ."
 alias t="tmux a -t"
 alias vlogin="vault login -method=oidc"
+alias rg="rg --hidden --glob '!.git'"
 
 function whoisblocking {
   lsof -i "tcp:${1}"
@@ -57,5 +59,18 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/Users/p.m.rasmussen/.local/bin:$PATH"
 export VAULT_ADDR="https://vault.maersk-digital.net"
 
-export LDFLAGS="-L/opt/homebrew/Cellar/freetds/1.4.23/lib -L/opt/homebrew/Cellar/openssl@3/3.3.1/lib"
-export CFLAGS="-I/opt/homebrew/Cellar/freetds/1.4.23/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/"
+
+# export LDFLAGS="-L/opt/homebrew/opt/libxslt/lib -L/opt/homebrew/Cellar/freetds/1.4.23/lib -L/opt/homebrew/Cellar/openssl@3/3.3.1/lib"
+# export CFLAGS="-I/opt/homebrew/opt/libxslt/include -I/opt/homebrew/Cellar/freetds/1.4.23/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/"
+
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored
+zstyle :compinstall filename '/Users/p.m.rasmussen/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
