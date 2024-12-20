@@ -24,7 +24,7 @@ return {
 		window = {
 			mappings = {
 				["l"] = "open",
-				["/"] = "fuzzy_finder",
+				["/"] = "noop",
 				["h"] = "close_node",
 				["H"] = "toggle_hidden",
 				["<space>"] = "none",

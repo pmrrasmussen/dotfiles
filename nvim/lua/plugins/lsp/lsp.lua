@@ -189,6 +189,7 @@ return {
 		local servers = {
 			-- clangd = {},
 			gopls = {},
+			texlab = {},
 			pyright = {},
 			ruff = {},
 			csharp_ls = {},
