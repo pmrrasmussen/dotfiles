@@ -33,6 +33,8 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "ruff" },
+			yaml = { "yamlls" },
+			csharp = { "csharp_ls" },
 		},
 	},
 }

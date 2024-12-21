@@ -7,7 +7,6 @@ return {
 				icons_enabled = true,
 				component_separators = "|",
 				section_separators = "",
-				theme = "tokyonight",
 			},
 			sections = {
 				lualine_x = {},

@@ -1,3 +1,4 @@
+local preview_on = { winopts = { preview = { hidden = "nohidden" } } }
 return {
 	"ibhagwan/fzf-lua",
 	-- -- optional for icon support
@@ -10,9 +11,17 @@ return {
 		{ "<leader>fw", "<cmd>FzfLua grep_cword<cr>", mode = { "n", "v" }, desc = "[F]zf current [w]ord" },
 		{ "<leader>fc", "<cmd>FzfLua lgrep_cbuf<cr>", mode = { "n", "v" }, desc = "[F]zf [c]urrent buffer" },
 		{
+			"<leader>fr",
+			function()
+				require("fzf-lua").lsp_references(preview_on)
+			end,
+			mode = { "n", "v" },
+			desc = "[F]zf [r]eferences",
+		},
+		{
 			"<leader>fs",
 			function()
-				require("fzf-lua").lsp_document_symbols()
+				require("fzf-lua").lsp_document_symbols(preview_on)
 			end,
 			mode = { "n", "v" },
 			desc = "[F]ind [s]ymbols",
