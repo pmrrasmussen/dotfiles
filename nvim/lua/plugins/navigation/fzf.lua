@@ -19,6 +19,14 @@ return {
 			desc = "[F]zf [r]eferences",
 		},
 		{
+			"<leader>fd",
+			function()
+				require("fzf-lua").lsp_definitions(preview_on)
+			end,
+			mode = { "n", "v" },
+			desc = "[F]zf [d]efinitions",
+		},
+		{
 			"<leader>fs",
 			function()
 				require("fzf-lua").lsp_document_symbols(preview_on)
@@ -28,7 +36,7 @@ return {
 		},
 	},
 	opts = {
-		{ "borderless_full" },
+		{ "borderless" },
 		winopts = {
 			preview = { hidden = "hidden" },
 		},
