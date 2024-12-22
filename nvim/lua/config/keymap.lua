@@ -3,12 +3,9 @@ local map = vim.keymap.set
 -- Leave search
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Stop highlighting search" })
 
--- map U to redo
-map("n", "U", "<C-r>", {})
-
 -- Using H/L to go to the begining and the end of line
-map("n", "H", "_", { desc = "Jump to start of line" })
-map("n", "L", "$", { desc = "Jump to end of line" })
+map({ "n", "v" }, "H", "_", { desc = "Jump to start of line" })
+map({ "n", "v" }, "L", "$", { desc = "Jump to end of line" })
 
 -- Integrate better with the system clipboard
 map({ "n", "v" }, "<leader>y", '"*y', { desc = "Copy to clipboard" })
