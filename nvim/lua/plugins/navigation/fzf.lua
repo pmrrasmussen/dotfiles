@@ -9,23 +9,7 @@ return {
 		{ "<leader>fg", "<cmd>FzfLua live_grep<cr>", mode = { "n", "v" }, desc = "[F]zf live [g]rep" },
 		{ "<leader>fb", "<cmd>FzfLua buffers<cr>", mode = { "n", "v" }, desc = "[F]zf [b]uffers" },
 		{ "<leader>fw", "<cmd>FzfLua grep_cword<cr>", mode = { "n", "v" }, desc = "[F]zf current [w]ord" },
-		{ "<leader>fc", "<cmd>FzfLua lgrep_cbuf<cr>", mode = { "n", "v" }, desc = "[F]zf [c]urrent buffer" },
-		{
-			"<leader>fr",
-			function()
-				require("fzf-lua").lsp_references(preview_on)
-			end,
-			mode = { "n", "v" },
-			desc = "[F]zf [r]eferences",
-		},
-		{
-			"<leader>fd",
-			function()
-				require("fzf-lua").lsp_definitions(preview_on)
-			end,
-			mode = { "n", "v" },
-			desc = "[F]zf [d]efinitions",
-		},
+		{ "<leader>fc", "<cmd>FzfLua lgrep_curbuf<cr>", mode = { "n", "v" }, desc = "[F]zf [c]urrent buffer" },
 		{
 			"<leader>fs",
 			function()
@@ -36,7 +20,7 @@ return {
 		},
 	},
 	opts = {
-		{ "borderless" },
+		fzf_colors = true,
 		winopts = {
 			preview = { hidden = "hidden" },
 		},
@@ -47,5 +31,8 @@ return {
 		files = {
 			cwd_prompt = false,
 		},
+		live_grep = preview_on,
+		grep = preview_on,
+		lsp = preview_on,
 	},
 }

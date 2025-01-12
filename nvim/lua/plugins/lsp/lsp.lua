@@ -71,6 +71,7 @@ return {
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 			callback = function(event)
+				require("fzf-lua")
 				-- NOTE: Remember that Lua is a real programming language, and as such it is possible
 				-- to define small helper and utility functions so you don't have to repeat yourself.
 				--
@@ -105,7 +106,16 @@ return {
 				-- WARN: This is not Goto Definition, this is Goto Declaration.
 				--  For example, in C this would take you to the header.
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-
+				map(
+					"gd",
+					"<cmd>FzfLua lsp_definitions jump_to_single_result=true ignore_current_line=true<cr>",
+					"[G]oto [D]efinition"
+				)
+				map(
+					"gr",
+					"<cmd>FzfLua lsp_references jump_to_single_result=true ignore_current_line=true hidden=nohidden<cr>",
+					"[G]oto [R]eference"
+				)
 				map("gj", goto_next_error_then_hint, "[G]oto next diagnostics error")
 				map("gk", goto_prev_error_then_hint, "[G]oto previous diagnostics error")
 
