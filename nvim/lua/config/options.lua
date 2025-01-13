@@ -15,6 +15,7 @@ o.expandtab = true
 o.tabstop = 2
 o.shiftwidth = 2
 o.smartindent = true
+o.splitright = true
 
 -- Margins
 o.signcolumn = "yes"
