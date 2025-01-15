@@ -10,6 +10,8 @@ return {
 	priority = 100,
 	opts = {
 		filesystem = {
+			group_empty_dirs = true,
+			scan_mode = "deep",
 			follow_current_file = {
 				enabled = true, -- This will find and focus the file in the active buffer every time
 				--               -- the current file is changed while the tree is open.

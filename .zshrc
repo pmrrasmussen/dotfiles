@@ -43,6 +43,9 @@ alias t="tmux a -t"
 alias vlogin="vault login -method=oidc"
 alias rg="rg --hidden --glob '!.git'"
 
+alias pr="poetry run"
+alias pi="poetry install"
+
 function whoisblocking {
   lsof -i "tcp:${1}"
 }
@@ -71,6 +74,12 @@ zstyle :compinstall filename '/Users/p.m.rasmussen/.zshrc'
 
 autoload -Uz compinit
 compinit
+
+# Load secrets
+if test -f ~/.config/secrets; then
+  source ~/.config/secrets
+fi
+
 # End of lines added by compinstall
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
