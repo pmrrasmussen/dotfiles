@@ -43,6 +43,8 @@ alias t="tmux a -t"
 alias vlogin="vault login -method=oidc"
 alias rg="rg --hidden --glob '!.git'"
 alias k="kubectl"
+alias kn="kubens"
+alias kc="kubectx"
 
 alias pr="poetry run"
 alias pi="poetry install"
