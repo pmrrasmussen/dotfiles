@@ -18,6 +18,13 @@ return {
 				end,
 				desc = "Open [t]erminal for [g]it",
 			},
+			{
+				"<leader>tk",
+				function()
+					require("toggleterm").toggle(3, nil, nil, "float", "git")
+				end,
+				desc = "Open [t]erminal for [k]ubernetes",
+			},
 		},
 		opts = {
 			-- size can be a number or function which is passed the current terminal

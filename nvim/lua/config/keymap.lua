@@ -9,6 +9,5 @@ map({ "n", "v" }, "L", "$", { desc = "Jump to end of line" })
 
 -- Integrate better with the system clipboard
 map({ "n", "v" }, "<leader>y", '"*y', { desc = "Copy to clipboard" })
-map({ "n", "v" }, "<leader>yy", '"*yy', { desc = "Copy line to clipboard" })
 map({ "n", "v" }, "<leader>p", '"*p', { desc = "Paste to clipboard" })
 map({ "n", "v" }, "<leader>P", '"*P', { desc = "Paste to clipboard" })

@@ -31,6 +31,7 @@ return {
 				["H"] = "toggle_hidden",
 				["<space>"] = "none",
 				["."] = "set_root",
+				["c"] = "copy",
 				["Y"] = {
 					function(state)
 						local node = state.tree:get_node()

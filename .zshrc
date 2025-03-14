@@ -86,3 +86,5 @@ fi
 # End of lines added by compinstall
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit

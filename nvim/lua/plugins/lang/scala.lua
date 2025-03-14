@@ -22,4 +22,22 @@ return {
 			group = nvim_metals_group,
 		})
 	end,
+	keys = {
+		{
+			"<leader>mi",
+			function()
+				require("metals").import_build()
+			end,
+			mode = { "n", "v" },
+			desc = "[M]etals [i]mport build",
+		},
+		{
+			"<leader>mc",
+			function()
+				require("metals").compile_clean()
+			end,
+			mode = { "n", "v" },
+			desc = "[M]etals [c]ompile clean",
+		},
+	},
 }
