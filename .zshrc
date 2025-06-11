@@ -46,6 +46,8 @@ alias k="kubectl"
 alias kn="kubens"
 alias kc="kubectx"
 
+alias gpp="g++-13"
+
 alias pr="poetry run"
 alias pi="poetry install"
 
