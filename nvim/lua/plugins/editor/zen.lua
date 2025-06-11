@@ -4,6 +4,8 @@ return {
 		{ "<leader>z", "<cmd>ZenMode<cr>" },
 	},
 	opts = {
-		width = 140, -- width of the Zen window
+		window = {
+			width = 160, -- width of the Zen window
+		},
 	},
 }

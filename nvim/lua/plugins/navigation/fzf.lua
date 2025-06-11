@@ -27,6 +27,11 @@ return {
 		defaults = {
 			git_icons = false,
 			file_icons = false,
+			keymap = {
+				fzf = {
+					["ctrl-q"] = "select-all+accept",
+				},
+			},
 		},
 		files = {
 			cwd_prompt = false,
