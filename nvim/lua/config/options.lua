@@ -27,4 +27,4 @@ o.ignorecase = true
 o.smartcase = true
 
 -- Colorscheme
-vim.cmd.colorscheme("catppuccin-macchiato")
+vim.cmd.colorscheme("catppuccin-frappe")

@@ -22,11 +22,11 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='nvim'
+# fi
 
 alias pip="pip3"
 
@@ -36,6 +36,7 @@ alias gpl="git pull"
 alias gps="git push"
 alias gad="git add"
 alias gch="git checkout"
+alias gchf='git checkout $(git branch --sort=-committerdate | fzf)'
 
 alias v="nvim ."
 alias p="poetry run nvim ."
@@ -45,6 +46,8 @@ alias rg="rg --hidden --glob '!.git'"
 alias k="kubectl"
 alias kn="kubens"
 alias kc="kubectx"
+alias kga="kubectl get pods,deployments,svc,ing,pippijobs,pippiservices,pippijobgroups,pippipipelines,cronjobs"
+alias cc="pipedream_co_captain.py"
 
 alias gpp="g++-13"
 
@@ -58,18 +61,27 @@ function whoisblocking {
 export PATH="/usr/local/share/dotnet:$PATH"
 export DOTNET_ROOT="/usr/share/dotnet"
 
+function set-java-home {
+  java_path="$(asdf which java)"
+  export JAVA_HOME="$(dirname "$(dirname "${java_path:A}")")"
+  export JDK_HOME=${JAVA_HOME}
+}
+
+set-java-home()
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 . "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/plugins/java/set-java-home.zsh"
+# . "$HOME/.asdf/plugins/java/set-java-home.zsh"
 . "/Users/p.m.rasmussen/repos/avocado-tooling/cli-utils.sh"
 
 export PATH="/Users/p.m.rasmussen/.local/bin:$PATH"
 export VAULT_ADDR="https://vault.maersk-digital.net"
 
+export PATH="/Users/p.m.rasmussen/repos/pipedream/pipedream/src/pipedream/demo/pipedream_co_captain:$PATH"
 
-# export LDFLAGS="-L/opt/homebrew/opt/libxslt/lib -L/opt/homebrew/Cellar/freetds/1.4.23/lib -L/opt/homebrew/Cellar/openssl@3/3.3.1/lib"
-# export CFLAGS="-I/opt/homebrew/opt/libxslt/include -I/opt/homebrew/Cellar/freetds/1.4.23/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/"
+export LDFLAGS="-L/opt/homebrew/opt/libxslt/lib -L/opt/homebrew/Cellar/freetds/1.4.23/lib -L/opt/homebrew/Cellar/openssl@3/3.3.1/lib"
+export CFLAGS="-I/opt/homebrew/opt/libxslt/include -I/opt/homebrew/Cellar/freetds/1.4.23/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/"
 
 
 # The following lines were added by compinstall
