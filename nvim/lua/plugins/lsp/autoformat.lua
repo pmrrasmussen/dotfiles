@@ -35,6 +35,8 @@ return {
 			python = { "ruff" },
 			yaml = { "yamlls" },
 			csharp = { "csharp_ls" },
+			cpp = { "clang_format" },
+			h = { "clang_format" },
 		},
 	},
 }

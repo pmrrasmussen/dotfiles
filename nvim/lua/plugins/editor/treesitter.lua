@@ -9,6 +9,7 @@ return {
 			ensure_installed = {
 				"c_sharp",
 				"lua",
+				"cpp",
 				"vim",
 				"python",
 				"html",
