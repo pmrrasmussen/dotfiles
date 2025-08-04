@@ -1,47 +1,46 @@
 return {
-	-- "mfussenegger/nvim-dap",
-	-- optional = true,
-	-- dependencies = {
-	-- 	-- Ensure C/C++ debugger is installed
-	-- 	"mason-org/mason.nvim",
-	-- 	optional = true,
-	-- 	opts = { ensure_installed = { "codelldb" } },
-	-- },
-	-- opts = function()
-	-- 	local dap = require("dap")
-	-- 	if not dap.adapters["codelldb"] then
-	-- 		require("dap").adapters["codelldb"] = {
-	-- 			type = "server",
-	-- 			host = "localhost",
-	-- 			port = "${port}",
-	-- 			executable = {
-	-- 				command = "codelldb",
-	-- 				args = {
-	-- 					"--port",
-	-- 					"${port}",
-	-- 				},
-	-- 			},
-	-- 		}
-	-- 	end
-	-- 	for _, lang in ipairs({ "c", "cpp" }) do
-	-- 		dap.configurations[lang] = {
-	-- 			{
-	-- 				type = "codelldb",
-	-- 				request = "launch",
-	-- 				name = "Launch file",
-	-- 				program = function()
-	-- 					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-	-- 				end,
-	-- 				cwd = "${workspaceFolder}",
-	-- 			},
-	-- 			{
-	-- 				type = "codelldb",
-	-- 				request = "attach",
-	-- 				name = "Attach to process",
-	-- 				pid = require("dap.utils").pick_process,
-	-- 				cwd = "${workspaceFolder}",
-	-- 			},
-	-- 		}
-	-- 	end
-	-- end,
+	"mfussenegger/nvim-dap",
+	-- TODO: Including codelldb in the lsp mason setup to get this to work. Refactor?
+	keys = {
+		{
+			"<leader>db",
+			function()
+				require("dap").toggle_breakpoint()
+			end,
+			mode = "n",
+			desc = "[D]ebug toggle [b]reakpoint",
+		},
+		{
+			"<leader>di",
+			function()
+				require("dap").step_into()
+			end,
+			mode = "n",
+			desc = "[D]ebug step [i]nto",
+		},
+		{
+			"<leader>do",
+			function()
+				require("dap").step_out()
+			end,
+			mode = "n",
+			desc = "[D]ebug step [o]ut",
+		},
+		{
+			"<leader>dn",
+			function()
+				require("dap").step_into()
+			end,
+			mode = "n",
+			desc = "[D]ebug step over ([n]ext)",
+		},
+		{
+			"<leader>dc",
+			function()
+				require("dap").continue({ new = true })
+			end,
+			mode = "n",
+			desc = "[D]ebug step over ([n]ext)",
+		},
+	},
 }
