@@ -5,6 +5,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
   git
+  starship
   zsh-bat
   zsh-syntax-highlighting
 )
@@ -47,7 +48,9 @@ function whoisblocking {
 export PATH="/usr/local/share/dotnet:$PATH"
 export DOTNET_ROOT="/usr/share/dotnet"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ "$(uname)" == "Darwin" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # The following lines were added by compinstall
 
