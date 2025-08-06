@@ -2,32 +2,25 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
-	config = function()
-		local configs = require("nvim-treesitter.configs")
-
-		configs.setup({
-			ensure_installed = {
-				"c_sharp",
-				"lua",
-				"cpp",
-				"vim",
-				"python",
-				"html",
-				"css",
-				"go",
-				"rust",
-				"latex",
-				"scala",
-				"yaml",
-				"bash",
-				"dockerfile",
-				"json",
-				"elixir",
-			},
-			sync_install = false,
-			auto_install = true,
-			highlight = { enable = true },
-			indent = { enable = true },
-		})
-	end,
+	lazy = false,
+	branch = "main",
+	ensure_installed = {
+		"c_sharp",
+		"lua",
+		"cpp",
+		"vim",
+		"python",
+		"html",
+		"css",
+		"go",
+		"rust",
+		"latex",
+		"scala",
+		"yaml",
+		"bash",
+		"dockerfile",
+		"json",
+		"elixir",
+	},
+	auto_install = true,
 }
