@@ -5,6 +5,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
   git
+  starship
   zsh-bat
   zsh-syntax-highlighting
 )
@@ -47,7 +48,9 @@ function whoisblocking {
 export PATH="/usr/local/share/dotnet:$PATH"
 export DOTNET_ROOT="/usr/share/dotnet"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ "$(uname)" == "Darwin" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # The following lines were added by compinstall
 
@@ -67,19 +70,4 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
