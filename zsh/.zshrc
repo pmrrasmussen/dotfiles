@@ -45,4 +45,4 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Must be sourced at the end of the file
-source $ZDOTDIR/deps/syntax-highlighting.zsh
+source $ZDOTDIR/deps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
