@@ -3,8 +3,10 @@ export ZDOTDIR="$HOME/dotfiles/zsh"
 export EDITOR="vim"
 export VISUAL="vim"
 
-export HISTSIZE=10000
-export SAVEHIST=10000
-setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+setopt HIST_SAVE_NO_DUPS
 
 export LANG=en_US.UTF-8

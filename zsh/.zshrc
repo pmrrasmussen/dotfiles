@@ -12,6 +12,22 @@ alias k="kubectl"
 alias kn="kubens"
 alias kc="kubectx"
 
+alias ta="tmux a -t"
+alias tn="tmux new -s"
+alias ts="tmux list-sessions"
+alias tk="tmux kill-server"
+
+# Unit testing with ctest
+alias cti='ctest preset=Default -R "$(ctest -N | grep -oP "Test #\d+:\s*\K.*" | fzf)"'
+alias ct='ctest preset=Default -R '
+
+# Building with cmake
+function cmi {
+  target=$(ninja -t targets | grep -v "/" | sed "s/\(.*\):.*/\1/" | fzf)
+  cmake --build . --target $target
+}
+alias cm="cmake --build . --target "
+
 alias gpp="g++-13"
 
 alias pr="poetry run"
