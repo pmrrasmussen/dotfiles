@@ -17,6 +17,8 @@ alias gpp="g++-13"
 alias pr="poetry run"
 alias pi="poetry install"
 
+alias hist='eval "$(fc -ln 0 | fzf)"'
+
 function whoisblocking {
   lsof -i "tcp:${1}"
 }
@@ -25,6 +27,13 @@ if [[ "$(uname)" == "Darwin" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# activate vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# sourcing plugins and dependencies
+eval "$(zoxide init zsh)"
+
 autoload -Uz compinit; compinit
 _comp_options+=(globdots)
 
@@ -32,17 +41,19 @@ source $ZDOTDIR/deps/completion.zsh
 
 fpath=("$ZDOTDIR/deps/" $fpath)
 autoload -Uz pure_prompt; pure_prompt
-
-eval "$(zoxide init zsh)"
-
-bindkey -v
-export KEYTIMEOUT=1
-
 zmodload zsh/complist
+
+# Order of loading matters for these two 
+source $ZDOTDIR/deps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/deps/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
-# Must be sourced at the end of the file
-source $ZDOTDIR/deps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+
+bindkey '^U' autosuggest-execute
+bindkey '^Y' autosuggest-accept
