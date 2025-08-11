@@ -1,0 +1,59 @@
+local pos_equal = function(p1, p2)
+	local r1, c1 = unpack(p1)
+	local r2, c2 = unpack(p2)
+	return r1 == r2 and c1 == c2
+end
+
+local goto_next_error_then_hint = function()
+	local pos = vim.api.nvim_win_get_cursor(0)
+	vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR, wrap = true })
+	local pos2 = vim.api.nvim_win_get_cursor(0)
+	if pos_equal(pos, pos2) then
+		vim.diagnostic.goto_next({ wrap = true })
+	end
+end
+
+local goto_prev_error_then_hint = function()
+	local pos = vim.api.nvim_win_get_cursor(0)
+	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR, wrap = true })
+	local pos2 = vim.api.nvim_win_get_cursor(0)
+	if pos_equal(pos, pos2) then
+		vim.diagnostic.goto_prev({ wrap = true })
+	end
+end
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(event)
+		local map = function(keys, func, desc, mode)
+			mode = mode or "n"
+			vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+		end
+
+		require("fzf-lua")
+		-- Jump to the type of the word under your cursor.
+		--  Useful when you're not sure what type a variable is and you want to see
+		--  the definition of its *type*, not where it was *defined*.
+		map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+		map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+		map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+
+		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+		map("gd", "<cmd>FzfLua lsp_definitions jump1=true ignore_current_line=true<cr>", "[G]oto [D]efinition")
+		map("K", vim.lsp.buf.hover, "Hover Documentation")
+		map(
+			"gr",
+			"<cmd>FzfLua lsp_references jump1=true ignore_current_line=true hidden=nohidden<cr>",
+			"[G]oto [R]eference"
+		)
+		map("gj", goto_next_error_then_hint, "[G]oto next diagnostics error")
+		map("gk", goto_prev_error_then_hint, "[G]oto previous diagnostics error")
+	end,
+})

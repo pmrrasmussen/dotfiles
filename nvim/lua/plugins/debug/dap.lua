@@ -40,7 +40,7 @@ return {
 				require("dap").continue({ new = true })
 			end,
 			mode = "n",
-			desc = "[D]ebug step over ([n]ext)",
+			desc = "[D]ebug [c]ontinue",
 		},
 	},
 }
