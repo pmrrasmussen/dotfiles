@@ -1,6 +1,10 @@
+cd $HOME
 rm .zsh*
 rm .zcompdump
 git clone https://github.com/pmrrasmussen/dotfiles.git
+cd dotfiles
+git submodule update --init --recursive
+cd $HOME
 mkdir -p .config
 ln -s $HOME/dotfiles/zsh/.zshenv .zshenv
 ln -s $HOME/dotfiles/.tmux.conf .tmux.conf
