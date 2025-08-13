@@ -1,10 +1,12 @@
-alias gst="git status"
-alias gcm="git commit"
+alias gs="git status"
+alias gca="git add .; git commit -m"
 alias gpl="git pull"
 alias gps="git push"
-alias gad="git add"
-alias gch="git checkout"
-alias gchf='git checkout $(git branch --sort=-committerdate | fzf)'
+alias ga="git add"
+alias gaa="git add ."
+alias gc="git checkout"
+alias gcn="git checkout -b"
+alias gci='git checkout $(git branch --sort=-committerdate | fzf)'
 
 alias v="nvim ."
 alias rg="rg --hidden --glob '!.git'"
