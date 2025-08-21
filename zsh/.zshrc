@@ -1,10 +1,12 @@
-alias gst="git status"
-alias gcm="git commit"
+alias gs="git status"
+alias gca="git add .; git commit -m"
 alias gpl="git pull"
 alias gps="git push"
-alias gad="git add"
-alias gch="git checkout"
-alias gchf='git checkout $(git branch --sort=-committerdate | fzf)'
+alias ga="git add"
+alias gaa="git add ."
+alias gc="git checkout"
+alias gcn="git checkout -b"
+alias gci='git checkout $(git branch --sort=-committerdate | fzf)'
 
 alias v="nvim ."
 alias rg="rg --hidden --glob '!.git'"
@@ -18,15 +20,15 @@ alias ts="tmux list-sessions"
 alias tk="tmux kill-server"
 
 # Unit testing with ctest
-alias cti='ctest preset=Default -R "$(ctest -N | grep -oP "Test #\d+:\s*\K.*" | fzf)"'
-alias ct='ctest preset=Default -R '
+alias ct='ctest --test-dir build --output-on-failure preset=Release -R'
+alias cti='ctest --test-dir build --output-on-failure preset=Release -R "$(ctest --test-dir build -N | grep -oP "Test #\d+:\s*\K.*" | fzf)"'
 
 # Building with cmake
 function cmi {
-  target=$(ninja -t targets | grep -v "/" | sed "s/\(.*\):.*/\1/" | fzf)
-  cmake --build . --target $target
+  target=$(ninja -C build -t targets | grep -v "/" | sed "s/\(.*\):.*/\1/" | fzf)
+  cmake --build build --target $target
 }
-alias cm="cmake --build . --target "
+alias cm="cmake --build build --target "
 
 alias gpp="g++-13"
 
