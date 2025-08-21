@@ -3,7 +3,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	lazy = false,
-	branch = "main",
+	branch = "master",
 	ensure_installed = {
 		"c_sharp",
 		"lua",

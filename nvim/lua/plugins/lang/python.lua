@@ -1,3 +1,28 @@
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "python" },
+	callback = function()
+		vim.treesitter.start()
+	end,
+})
+
+require("lspconfig").pyright.setup({
+	settings = {
+		pyright = {
+			disableOrganizeImportsOnSave = true,
+			disableOrganizeImports = true,
+		},
+		python = {
+			analysis = {
+				typeCheckingMode = "basic", -- Set to "strict" for stricter type checking
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+			},
+		},
+	},
+})
+
+vim.lsp.enable("ruff")
+
 return {
 	"linux-cultist/venv-selector.nvim",
 	dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },

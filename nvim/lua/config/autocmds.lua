@@ -31,12 +31,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(event)
+	callback = function(args)
 		local map = function(keys, func, desc, mode)
 			mode = mode or "n"
-			vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+			vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = "LSP: " .. desc })
 		end
-
+		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+		-- Auto-format ("lint") on save.
+		-- Usually not needed if server supports "textDocument/willSaveWaitUntil".
+		if
+			not client:supports_method("textDocument/willSaveWaitUntil")
+			and client:supports_method("textDocument/formatting")
+		then
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = vim.api.nvim_create_augroup("my.lsp", { clear = false }),
+				buffer = args.buf,
+				callback = function()
+					vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+				end,
+			})
+		end
 		require("fzf-lua")
 		-- Jump to the type of the word under your cursor.
 		--  Useful when you're not sure what type a variable is and you want to see
