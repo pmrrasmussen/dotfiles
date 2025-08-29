@@ -11,7 +11,6 @@ return {
                 "jsonls",
                 "clangd",
                 "pyright",
-                "ruff",
                 "yamlls",
             },
             automatic_installation = true,

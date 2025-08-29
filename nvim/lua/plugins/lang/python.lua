@@ -8,36 +8,18 @@ vim.api.nvim_create_autocmd("FileType", {
 require("lspconfig").pyright.setup({
     settings = {
         pyright = {
-            disableOrganizeImportsOnSave = true,
-            disableOrganizeImports = true,
+            disableOrganizeImportsOnSave = false,
+            disableOrganizeImports = false,
         },
         python = {
             analysis = {
-                typeCheckingMode = "basic", -- Set to "strict" for stricter type checking
+                typeCheckingMode = "off", -- Set to "strict" for stricter type checking
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,
             },
         },
     },
 })
-
-require("lspconfig").ruff.setup({
-    init_options = {
-        settings = {
-            configurationPreference = "filesystemFirst",
-            lineLength = 120,
-            fixAll = true,
-            organizeImports = true,
-            lint = {
-                enable = false,
-            },
-            format = {
-                enable = true,
-            },
-        },
-    },
-})
-vim.lsp.enable("ruff")
 
 return {
     "linux-cultist/venv-selector.nvim",

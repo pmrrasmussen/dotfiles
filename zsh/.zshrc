@@ -35,7 +35,7 @@ alias gpp="g++-13"
 alias pr="poetry run"
 alias pi="poetry install"
 
-alias hist='eval "$(fc -ln 0 | fzf)"'
+alias hist='eval "$(fc -ln 0 | fzf --tac)"'
 
 function whoisblocking {
   lsof -i "tcp:${1}"
