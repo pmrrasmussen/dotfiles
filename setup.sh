@@ -2,6 +2,7 @@ cd $HOME
 rm -f .zshrc
 rm -f .zshenv
 rm -f .zcompdump
+rm -rf .config/nvim
 rm -f .tmux.conf
 git clone https://github.com/pmrrasmussen/dotfiles.git
 cd dotfiles
