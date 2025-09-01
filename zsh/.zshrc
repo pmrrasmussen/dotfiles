@@ -52,10 +52,9 @@ export KEYTIMEOUT=1
 # sourcing plugins and dependencies
 eval "$(zoxide init zsh)"
 
-autoload -Uz compinit; compinit
-_comp_options+=(globdots)
 
 source $ZDOTDIR/deps/completion.zsh
+
 
 fpath=("$ZDOTDIR/deps/" $fpath)
 autoload -Uz pure_prompt; pure_prompt
@@ -75,3 +74,6 @@ bindkey '^[[B' history-beginning-search-forward
 
 bindkey '^U' autosuggest-execute
 bindkey '^Y' autosuggest-accept
+
+# autoload -Uz compinit; compinit
+# _comp_options+=(globdots)
