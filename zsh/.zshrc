@@ -28,7 +28,10 @@ function cmi {
   target=$(ninja -C build -t targets | grep -v "/" | sed "s/\(.*\):.*/\1/" | fzf)
   cmake --build build --target $target
 }
-alias cm="cmake --build build --target "
+alias cmt="cmake --build build --target "
+alias cm="cmake --build --preset=Default"
+alias cf="cmake -D FIX=YES -D FORMAT_COMMAND=clang-format-21 -P cmake/lint.cmake"
+alias cu="./tools/check_include_what_you_use.sh"
 
 alias gpp="g++-13"
 
