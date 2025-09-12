@@ -11,5 +11,5 @@ return {
 			},
 		},
 	},
-	{ "Bilal2453/luvit-meta", lazy = true },
+    { "Bilal2453/luvit-meta", lazy = true },
 }

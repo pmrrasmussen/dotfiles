@@ -12,6 +12,7 @@ return {
                 "clangd",
                 "pyright",
                 "yamlls",
+                "stylua",
             },
             automatic_installation = true,
         },
