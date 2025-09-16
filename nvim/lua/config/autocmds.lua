@@ -61,7 +61,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- 		end,
 		-- 	})
 		-- end
-		require("fzf-lua")
+		-- require("fzf-lua")
 		-- Jump to the type of the word under your cursor.
 		--  Useful when you're not sure what type a variable is and you want to see
 		--  the definition of its *type*, not where it was *defined*.
