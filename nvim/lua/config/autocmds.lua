@@ -15,13 +15,12 @@ end
 
 local goto_prev_error_then_hint = function()
 	local pos = vim.api.nvim_win_get_cursor(0)
-	vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, wrap = true })
+	vim.diagnostic.judp({ count = -1, severity = vim.diagnostic.severity.ERROR, wrap = true })
 	local pos2 = vim.api.nvim_win_get_cursor(0)
 	if pos_equal(pos, pos2) then
 		vim.diagnostic.jump({ count = -1, wrap = true })
 	end
 end
-
 
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 	desc = "Auto-save when leaving a buffer or when the editor loses focus",
@@ -74,7 +73,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("gd", "<cmd>FzfLua lsp_definitions jump1=true ignore_current_line=true<cr>", "[G]oto [D]efinition")
 		map("K", vim.lsp.buf.hover, "Hover Documentation")
 		map(
-			"gr",
+			"grr",
 			"<cmd>FzfLua lsp_references jump1=true ignore_current_line=true hidden=nohidden<cr>",
 			"[G]oto [R]eference"
 		)
