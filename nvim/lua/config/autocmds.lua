@@ -6,25 +6,36 @@ end
 
 local goto_next_error_then_hint = function()
 	local pos = vim.api.nvim_win_get_cursor(0)
-	vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR, wrap = true })
+	vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, wrap = true })
 	local pos2 = vim.api.nvim_win_get_cursor(0)
 	if pos_equal(pos, pos2) then
-		vim.diagnostic.goto_next({ wrap = true })
+		vim.diagnostic.jump({ count = 1, wrap = true })
 	end
 end
 
 local goto_prev_error_then_hint = function()
 	local pos = vim.api.nvim_win_get_cursor(0)
-	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR, wrap = true })
+	vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, wrap = true })
 	local pos2 = vim.api.nvim_win_get_cursor(0)
 	if pos_equal(pos, pos2) then
-		vim.diagnostic.goto_prev({ wrap = true })
+		vim.diagnostic.jump({ count = -1, wrap = true })
 	end
 end
 
+
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
+	desc = "Auto-save when leaving a buffer or when the editor loses focus",
+	group = vim.api.nvim_create_augroup("auto-save", { clear = true }),
+	callback = function()
+		if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
+			vim.api.nvim_command("silent update")
+		end
+	end,
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
 	end,
