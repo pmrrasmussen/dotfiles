@@ -35,8 +35,7 @@ alias cu="./tools/check_include_what_you_use.sh"
 
 alias gpp="g++-13"
 
-alias pr="poetry run"
-alias pi="poetry install"
+alias pa="source .venv/bin/activate"
 
 alias hist='eval "$(fc -ln 0 | fzf --tac)"'
 
