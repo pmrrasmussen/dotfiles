@@ -16,7 +16,7 @@ return {
 	},
 	opts = {
 		format_on_save = {
-			timeout_ms = 500,
+			timeout_ms = 10000,
 			lsp_format = "never",
 		},
 		-- notify_on_error = false,

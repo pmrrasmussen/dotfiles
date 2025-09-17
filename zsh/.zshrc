@@ -20,8 +20,8 @@ alias ts="tmux list-sessions"
 alias tk="tmux kill-server"
 
 # Unit testing with ctest
-alias ct='ctest --test-dir build --output-on-failure preset=Release -R'
-alias cti='ctest --test-dir build --output-on-failure preset=Release -R "$(ctest --test-dir build -N | grep -oP "Test #\d+:\s*\K.*" | fzf)"'
+alias ct='ctest --test-dir build --output-on-failure -R'
+alias cti='ctest --test-dir build --output-on-failure -R "$(ctest --test-dir build -N | grep -oP "Test[ \t]+#\d*:\s*\K.*" | fzf)"'
 
 # Building with cmake
 function cmi {

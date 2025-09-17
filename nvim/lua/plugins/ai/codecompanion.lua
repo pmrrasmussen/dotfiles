@@ -24,12 +24,16 @@ return {
 						},
 					},
 				},
-				adapter = "copilot",
-				model = "claude-3.5-sonnet",
+				adapter = {
+					name = "copilot",
+					model = "claude-3.7-sonnet",
+				},
 			},
 			inline = {
-				adapter = "copilot",
-				model = "claude-3.5-sonnet",
+				adapter = {
+					name = "copilot",
+					model = "claude-3.7-sonnet",
+				},
 			},
 		},
 	},
