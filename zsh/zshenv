@@ -1,5 +1,6 @@
 export ZDOTDIR="$HOME/dotfiles/zsh"
 
+
 export EDITOR="vim"
 export VISUAL="vim"
 

@@ -44,7 +44,9 @@ function whoisblocking {
 }
 
 if [[ "$(uname)" == "Darwin" ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+    export PATH="/opt/homebrew/bin:$PATH"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # activate vi mode

@@ -1,20 +1,21 @@
 vim.diagnostic.config({ virtual_text = true })
 return {
-    { "mason-org/mason.nvim", opts = {} },
+	{ "mason-org/mason.nvim", opts = {} },
 
-    {
-        "mason-org/mason-lspconfig.nvim",
-        dependencies = { "neovim/nvim-lspconfig" },
-        opts = {
-            ensure_installed = {
-                "lua_ls",
-                "jsonls",
-                "clangd",
-                "pyright",
-                "yamlls",
-                "stylua",
-            },
-            automatic_installation = true,
-        },
-    },
+	{
+		"mason-org/mason-lspconfig.nvim",
+		dependencies = { "neovim/nvim-lspconfig" },
+		opts = {
+			ensure_installed = {
+				"lua_ls",
+				"jsonls",
+				"clangd",
+				-- "pyright",
+				"pyrefly",
+				"yamlls",
+				"stylua",
+			},
+			automatic_installation = true,
+		},
+	},
 }
