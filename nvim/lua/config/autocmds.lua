@@ -81,3 +81,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("gk", goto_prev_error_then_hint, "[G]oto previous diagnostics error")
 	end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = {
+		"cpp",
+		"h",
+		"python",
+		"lua",
+		"go",
+		"json",
+		"yaml",
+		"sh",
+		"rust",
+		"scala",
+		"elixir",
+		"html",
+		"css",
+		"markdown",
+	},
+	group = vim.api.nvim_create_augroup("treesitter", { clear = true }),
+	callback = function()
+		vim.treesitter.start()
+	end,
+})

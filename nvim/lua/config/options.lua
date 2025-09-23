@@ -1,7 +1,7 @@
 local o = vim.o
 
 -- Info
-o.shortmess = "I"
+o.shortmess = o.shortmess .. "IAW"
 
 -- Experience
 o.mouse = "a"
