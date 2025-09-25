@@ -2,8 +2,7 @@ return {
 	"stevearc/conform.nvim",
 	dependencies = { "mason.nvim" },
 	lazy = true,
-	event = { "BufWritePre" },
-	cmd = { "ConformInfo" },
+	event = { "VeryLazy" },
 	keys = {
 		{
 			"<leader>Bf",
@@ -17,7 +16,7 @@ return {
 	opts = {
 		format_on_save = {
 			timeout_ms = 10000,
-			lsp_format = "never",
+			lsp_format = "fallback",
 		},
 		-- notify_on_error = false,
 		-- format_on_save = function(bufnr)
@@ -45,6 +44,8 @@ return {
 		},
 		formatters = {
 			clang_format = {
+				inherit = false,
+				command = "clang-format-21", -- instead of "clang-format"
 				prepend_args = { "--style=file:/home/peterrasmussen/EPEXcpp/.clang-format" },
 			},
 		},

@@ -1,21 +1,20 @@
-vim.lsp.config("pyrefly", {})
-vim.lsp.enable("pyrefly")
-
--- require("lspconfig").pyright.setup({
---     settings = {
---         pyright = {
---             disableOrganizeImportsOnSave = false,
---             disableOrganizeImports = false,
---         },
---         python = {
---             analysis = {
---                 typeCheckingMode = "off", -- Set to "strict" for stricter type checking
---                 autoSearchPaths = true,
---                 useLibraryCodeForTypes = true,
---             },
---         },
---     },
--- })
+-- vim.lsp.config("pyrefly", {})
+-- vim.lsp.enable("pyrefly")
+local config = vim.lsp.config("pyright", {
+	settings = {
+		pyright = {
+			disableOrganizeImportsOnSave = false,
+			disableOrganizeImports = false,
+		},
+		python = {
+			analysis = {
+				typeCheckingMode = "off", -- change to "strict" if you want stricter checks
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+			},
+		},
+	},
+})
 
 return {
 	"linux-cultist/venv-selector.nvim",

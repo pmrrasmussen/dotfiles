@@ -1,33 +1,47 @@
--- Treesitter (syntax parser/highlighter)
 return {
 	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
-	lazy = false,
-	branch = "master",
-	opt = {
+	branch = "main",
+	version = false, -- last release is way too old and doesn't work on Windows
+	build = function()
+		local TS = require("nvim-treesitter")
+		TS.update(nil, { summary = true })
+	end,
+	lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+	cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
+	opts_extend = { "ensure_installed" },
+	opts = {
+		indent = { enable = true },
+		highlight = { enable = true },
+		folds = { enable = true },
+		auto_install = true,
 		ensure_installed = {
 			"bash",
-			"c_sharp",
-			"cpp",
-			"css",
-			"dockerfile",
-			"elixir",
-			"go",
+			"c",
+			"diff",
 			"html",
+			"javascript",
+			"jsdoc",
 			"json",
-			"latex",
+			"jsonc",
 			"lua",
-			"markdown_inline",
+			"luadoc",
+			"luap",
 			"markdown",
+			"markdown_inline",
+			"printf",
 			"python",
-			"rust",
-			"scala",
+			"query",
+			"regex",
+			"toml",
+			"tsx",
+			"typescript",
 			"vim",
+			"vimdoc",
+			"xml",
 			"yaml",
 		},
-		auto_install = true,
-		highlight = {
-			enable = true,
-		},
 	},
+	config = function(_, opts)
+		require("nvim-treesitter.configs").setup(opts)
+	end,
 }

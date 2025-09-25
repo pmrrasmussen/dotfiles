@@ -61,14 +61,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- 		end,
 		-- 	})
 		-- end
-		-- require("fzf-lua")
+		--
+		require("fzf-lua")
 		-- Jump to the type of the word under your cursor.
 		--  Useful when you're not sure what type a variable is and you want to see
 		--  the definition of its *type*, not where it was *defined*.
 		map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-		map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-		-- map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
-
 		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 		map("gd", "<cmd>FzfLua lsp_definitions jump1=true ignore_current_line=true<cr>", "[G]oto [D]efinition")
 		map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -79,28 +77,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		)
 		map("gj", goto_next_error_then_hint, "[G]oto next diagnostics error")
 		map("gk", goto_prev_error_then_hint, "[G]oto previous diagnostics error")
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = {
-		"cpp",
-		"h",
-		"python",
-		"lua",
-		"go",
-		"json",
-		"yaml",
-		"sh",
-		"rust",
-		"scala",
-		"elixir",
-		"html",
-		"css",
-		"markdown",
-	},
-	group = vim.api.nvim_create_augroup("treesitter", { clear = true }),
-	callback = function()
-		vim.treesitter.start()
 	end,
 })
