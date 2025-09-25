@@ -22,7 +22,6 @@ alias tk="tmux kill-server"
 # Unit testing with ctest
 alias ct='ctest --test-dir build --output-on-failure -R'
 alias cti='ctest --test-dir build --output-on-failure -R "$(ctest --test-dir build -N | grep -oP "Test[ \t]+#\d*:\s*\K.*" | fzf)"'
-alias clang-format="clang-format-21"
 
 # Building with cmake
 function cmi {
