@@ -11,6 +11,7 @@ return {
 				"jsonls",
 				"clangd",
 				"pyright",
+				"black",
 				-- "pyrefly",
 				"yamlls",
 				"stylua",
