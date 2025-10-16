@@ -8,4 +8,5 @@ return {
 	{ import = "plugins.colorschemes" },
 	{ import = "plugins.ui" },
 	{ import = "plugins.debug" },
+	{ import = "plugins.test" },
 }

@@ -5,12 +5,25 @@ local config = vim.lsp.config("pyright", {
 		pyright = {
 			disableOrganizeImportsOnSave = false,
 			disableOrganizeImports = false,
+			useLibraryCodeForTypes = false,
+			openFilesOnly = true,
 		},
 		python = {
 			analysis = {
-				typeCheckingMode = "off", -- change to "strict" if you want stricter checks
+				typeCheckingMode = "basic", -- change to "strict" if you want stricter checks
 				autoSearchPaths = true,
-				useLibraryCodeForTypes = true,
+				exclude = {
+					"**/build",
+					"**/dist",
+					"**/__pycache__",
+					"**/.venv",
+					"**/venv",
+					"**/.mypy_cache",
+					"**/.pytest_cache",
+					"**/wandb",
+					"**.egg-info",
+					"**/site-packages",
+				},
 			},
 		},
 	},
