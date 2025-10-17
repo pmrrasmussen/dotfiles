@@ -33,4 +33,9 @@ return {
 			},
 		})
 	end,
+	keys = {
+		{ "<leader>tr", ":Neotest run<cr>", mode = { "n", "v" }, desc = "Neo[t]est [r]un" },
+		{ "<leader>to", ":Neotest output-panel<cr>", mode = { "n", "v" }, desc = "Neo[t]est [o]utput" },
+		{ "<leader>ts", ":Neotest summary<cr>", mode = { "n", "v" }, desc = "Neo[t]est [o]utput" },
+	},
 }

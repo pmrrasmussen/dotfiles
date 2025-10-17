@@ -73,11 +73,11 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
-bindkey '^[[A' history-beginning-search-backward
-bindkey '^[[B' history-beginning-search-forward
+bindkey '^[h' history-beginning-search-backward
+bindkey '^[l' history-beginning-search-forward
 
-bindkey '^U' autosuggest-execute
-bindkey '^Y' autosuggest-accept
+bindkey '^[j' autosuggest-execute
+bindkey '^[k' autosuggest-accept
 
 # autoload -Uz compinit; compinit
 # _comp_options+=(globdots)
