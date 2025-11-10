@@ -1,0 +1,1 @@
+/Users/peter/dotfiles/zsh/.zshenv
