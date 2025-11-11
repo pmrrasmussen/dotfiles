@@ -46,6 +46,7 @@ function whoisblocking {
 if [[ "$(uname)" == "Darwin" ]]; then
     export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
     export PATH="/opt/homebrew/bin:$PATH"
+    export PATH="/Users/peter/.cargo/bin:$PATH"
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
