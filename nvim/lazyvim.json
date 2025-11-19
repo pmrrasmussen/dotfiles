@@ -11,7 +11,9 @@
     "lazyvim.plugins.extras.lang.toml",
     "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.test.core",
-    "lazyvim.plugins.extras.util.dot"
+    "lazyvim.plugins.extras.util.dot",
+    "lazyvim.plugins.extras.util.gh",
+    "lazyvim.plugins.extras.util.gitui"
   ],
   "install_version": 8,
   "news": {
