@@ -27,4 +27,14 @@ return {
       { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
     },
   },
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    opts = {},
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = { diagnostics = { virtual_text = false } },
+  },
 }
