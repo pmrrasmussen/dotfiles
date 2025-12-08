@@ -5,6 +5,7 @@ rm -f .zshenv
 rm -rf .config/nvim
 rm -rf .config/hypr
 rm -rf .config/git
+rm -rf .config/alacritty
 rm -f .tmux.conf
 
 # Remove nvim cache
@@ -23,4 +24,4 @@ ln -s $HOME/dotfiles/tmux/tmux.conf .tmux.conf
 ln -s $HOME/dotfiles/nvim .config/nvim
 ln -s $HOME/dotfiles/git .config/git
 ln -s $HOME/dotfiles/hypr .config/hypr
-
+ln -s $HOME/dotfiles/hypr .config/alacritty
