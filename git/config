@@ -1,0 +1,27 @@
+[user]
+	name = Peter Rasmussen
+	email = pr@twig.energy
+	username = pr-twig
+[core]
+	editor = nvim
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	pager = delta
+[branch]
+	sort = -committerdate
+[init]
+	defaultBranch = main
+[checkout]
+	defaultRemote = origin
+[push]
+	autoSetupRemote = true
+[rerere]
+	enabled = true           # Record and reuse conflict resolutions
+	autoupdate = true        # Apply stored conflict resolutions automatically
+[alias]
+  aa = add --all
+  cn = branch -b
+  co = checkout 
+  ca = commit -am 
+  s = status
+  rh = reset --hard
+  rs = reset

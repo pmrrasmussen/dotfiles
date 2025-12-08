@@ -3,6 +3,8 @@ cd $HOME
 rm -f .zshrc
 rm -f .zshenv
 rm -rf .config/nvim
+rm -rf .config/hypr
+rm -rf .config/git
 rm -f .tmux.conf
 
 # Remove nvim cache
@@ -19,3 +21,6 @@ mkdir -p .config
 ln -s $HOME/dotfiles/zsh/.zshenv .zshenv
 ln -s $HOME/dotfiles/tmux/tmux.conf .tmux.conf
 ln -s $HOME/dotfiles/nvim .config/nvim
+ln -s $HOME/dotfiles/git .config/git
+ln -s $HOME/dotfiles/hypr .config/hypr
+
