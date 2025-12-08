@@ -41,6 +41,15 @@ return {
         desc = "File Explorer",
       },
     },
+    opts = {
+      picker = {
+        sources = {
+          files = {
+            follow = true,
+          },
+        },
+      },
+    },
   },
   {
     "neovim/nvim-lspconfig",
