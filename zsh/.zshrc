@@ -57,6 +57,8 @@ export KEYTIMEOUT=1
 # sourcing plugins and dependencies
 eval "$(zoxide init zsh)"
 
+autoload -Uz compinit; compinit
+_comp_options+=(globdots)
 
 source $ZDOTDIR/deps/completion.zsh
 
@@ -80,5 +82,3 @@ bindkey '^[l' history-beginning-search-forward
 bindkey '^[j' autosuggest-execute
 bindkey '^[k' autosuggest-accept
 
-# autoload -Uz compinit; compinit
-# _comp_options+=(globdots)
