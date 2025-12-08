@@ -1,3 +1,5 @@
+. /etc/os-release
+
 alias gs="git status"
 alias gca="git add .; git commit -m"
 alias gpl="git pull"
@@ -82,3 +84,14 @@ bindkey '^[l' history-beginning-search-forward
 bindkey '^[j' autosuggest-execute
 bindkey '^[k' autosuggest-accept
 
+# omarchy related stuff
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+else
+    ID=unknown
+fi
+
+if [[ "$ID" = "arch" ]]; then
+    export SSH_AUTH_SOCK="/home/peter/.ssh/agent"
+    ssh-add /home/peter/.ssh/id_ecdsa_sk_rk 2>/dev/null
+fi
