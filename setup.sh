@@ -1,3 +1,5 @@
+[ "$EUID" -ne 0 ] && exec sudo bash "$0" "$@"
+
 cd $HOME
 # Remove old dotfiles
 rm -f .zshrc
@@ -25,3 +27,5 @@ ln -s $HOME/dotfiles/nvim .config/nvim
 ln -s $HOME/dotfiles/git .config/git
 ln -s $HOME/dotfiles/hypr .config/hypr
 ln -s $HOME/dotfiles/hypr .config/alacritty
+
+find "$HOME/dotfiles/scripts" -type f -exec chmod +x {} \;
