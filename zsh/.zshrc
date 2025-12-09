@@ -59,19 +59,16 @@ export KEYTIMEOUT=1
 # sourcing plugins and dependencies
 eval "$(zoxide init zsh)"
 
-autoload -Uz compinit; compinit
-_comp_options+=(globdots)
 
+# Order of loading matters for these two 
+source $ZDOTDIR/deps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/deps/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/deps/completion.zsh
-
 
 fpath=("$ZDOTDIR/deps/" $fpath)
 autoload -Uz pure_prompt; pure_prompt
 zmodload zsh/complist
 
-# Order of loading matters for these two 
-source $ZDOTDIR/deps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZDOTDIR/deps/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
@@ -95,3 +92,6 @@ if [[ "$ID" = "arch" ]]; then
     export SSH_AUTH_SOCK="/home/peter/.ssh/agent"
     ssh-add /home/peter/.ssh/id_ecdsa_sk_rk 2>/dev/null
 fi
+
+# autoload -Uz compinit; compinit
+# _comp_options+=(globdots)
