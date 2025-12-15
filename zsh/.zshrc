@@ -130,19 +130,17 @@ git checkout ${REVISION}
 source .venv/bin/activate
 pip install ".[dev]"
 mkdir -p runs/${REVISION}
-export REVISION=${REVISION}
-export MESSAGE="${MESSAGE}"
-export HOST=${HOST}
-export SCRIPT=${SCRIPT}
 export DIR=${DIR}
 export DEVICE=${DEVICE}
-screen -dmSL ${DIR}-${REVISION} bash -c "
-    CUDA_VISIBLE_DEVICES=${DEVICE} 
-    PYTHONPATH=. sh ${SCRIPT} > runs/${REVISION}/output.log 2>&1
-"
+tmux new-session -d -s "${DIR}-${REVISION}" '
+    export REVISION=${REVISION}
+    export MESSAGE="${MESSAGE}"
+    export HOST=${HOST}
+    export SCRIPT=${SCRIPT}
+    CUDA_VISIBLE_DEVICES=${DEVICE} sh ${SCRIPT} 2>&1 | tee runs/${REVISION}/output.log 
+'
 sleep 1
-cd runs/${REVISION}
-tail -f output.log
+tail -f runs/${REVISION}/output.log
 EOF
 }
 
