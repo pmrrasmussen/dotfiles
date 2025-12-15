@@ -1,5 +1,3 @@
-[ "$EUID" -ne 0 ] && exec sudo bash "$0" "$@"
-
 cd $HOME
 # Remove old dotfiles
 rm -f .zshrc

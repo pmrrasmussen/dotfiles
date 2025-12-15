@@ -13,6 +13,8 @@
 	defaultRemote = origin
 [push]
 	autoSetupRemote = true
+[pull]
+    ff = only
 [rerere]
 	enabled = true           # Record and reuse conflict resolutions
 	autoupdate = true        # Apply stored conflict resolutions automatically
