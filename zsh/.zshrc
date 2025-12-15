@@ -59,19 +59,16 @@ export KEYTIMEOUT=1
 # sourcing plugins and dependencies
 eval "$(zoxide init zsh)"
 
-autoload -Uz compinit; compinit
-_comp_options+=(globdots)
 
+# Order of loading matters for these two 
+source $ZDOTDIR/deps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/deps/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/deps/completion.zsh
-
 
 fpath=("$ZDOTDIR/deps/" $fpath)
 autoload -Uz pure_prompt; pure_prompt
 zmodload zsh/complist
 
-# Order of loading matters for these two 
-source $ZDOTDIR/deps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZDOTDIR/deps/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
@@ -95,3 +92,57 @@ if [[ "$ID" = "arch" ]]; then
     export SSH_AUTH_SOCK="/home/peter/.ssh/agent"
     ssh-add /home/peter/.ssh/id_ecdsa_sk_rk 2>/dev/null
 fi
+
+# autoload -Uz compinit; compinit
+# _comp_options+=(globdots)
+
+function run {
+    #usage: run host gpu path/to/experiment.py
+    if [[ $# -ne 3 ]]; then
+        echo "Usage: run host gpu path/to/experiment.py"
+        return 1
+    fi
+
+    local HOST="$1"
+    local DEVICE="$2"
+    local SCRIPT="$3"
+
+    git fetch --quiet
+
+    if ! git diff-index --quiet HEAD --; then
+        echo "ERROR: uncommitted changes."
+        return 1
+    fi
+
+    if [ "$(git rev-parse @)" != "$(git rev-parse @{u})" ]; then
+        echo "ERROR: local branch does not match origin (not up-to-date or diverged)."
+        return 1
+    fi
+
+    local REVISION="$(git rev-parse --short HEAD)"
+    local MESSAGE="$(git show -s --format=%s)"
+    local DIR="${PWD##*/}"
+    ssh -A -q "$HOST" << EOF
+set -ex
+cd ~/runners/${DIR}
+git fetch
+git checkout ${REVISION}
+source .venv/bin/activate
+pip install ".[dev]"
+mkdir -p runs/${REVISION}
+export REVISION=${REVISION}
+export MESSAGE="${MESSAGE}"
+export HOST=${HOST}
+export SCRIPT=${SCRIPT}
+export DIR=${DIR}
+export DEVICE=${DEVICE}
+screen -dmSL ${DIR}-${REVISION} bash -c "
+    CUDA_VISIBLE_DEVICES=${DEVICE} 
+    PYTHONPATH=. sh ${SCRIPT} > runs/${REVISION}/output.log 2>&1
+"
+sleep 1
+cd runs/${REVISION}
+tail -f output.log
+EOF
+}
+
