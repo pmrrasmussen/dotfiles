@@ -56,8 +56,6 @@ fi
 bindkey -v
 export KEYTIMEOUT=1
 
-# sourcing plugins and dependencies
-eval "$(zoxide init zsh)"
 
 
 # Order of loading matters for these two 
@@ -69,6 +67,8 @@ fpath=("$ZDOTDIR/deps/" $fpath)
 autoload -Uz pure_prompt; pure_prompt
 zmodload zsh/complist
 
+# sourcing plugins and dependencies
+eval "$(zoxide init zsh)"
 
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
