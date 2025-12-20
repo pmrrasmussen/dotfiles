@@ -61,35 +61,17 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyright = {
-          settings = {
-            pyright = {
-              disableOrganizeImportsOnSave = false,
-              disableOrganizeImports = false,
-              useLibraryCodeForTypes = false,
-              openFilesOnly = true,
-            },
-            python = {
-              analysis = {
-                typeCheckingMode = "basic", -- change to "strict" if you want stricter checks
-                autoSearchPaths = true,
-                exclude = {
-                  "**/build",
-                  "**/dist",
-                  "**/__pycache__",
-                  "**/.venv",
-                  "**/venv",
-                  "**/.mypy_cache",
-                  "**/.pytest_cache",
-                  "**/wandb",
-                  "**.egg-info",
-                  "**/site-packages",
-                },
-              },
-            },
-          },
-        },
+        pyrefly = {},
       },
     },
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      if not vim.tbl_contains(opts.ensure_installed, "pyrefly") then
+        table.insert(opts.ensure_installed, "pyrefly")
+      end
+    end,
   },
 }
