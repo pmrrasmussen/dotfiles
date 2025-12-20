@@ -34,10 +34,6 @@ return {
     opts = {},
   },
   {
-    "neovim/nvim-lspconfig",
-    opts = { diagnostics = { virtual_text = false } },
-  },
-  {
     "nvim-mini/mini.nvim",
     version = false,
     config = function()
