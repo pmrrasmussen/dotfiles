@@ -29,6 +29,16 @@ return {
     end,
   },
   {
+    "folke/flash.nvim",
+    opts = {
+      modes = {
+        search = {
+          enabled = true,
+        },
+      },
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
