@@ -96,6 +96,54 @@ fi
 # autoload -Uz compinit; compinit
 # _comp_options+=(globdots)
 
+function prun {
+    #usage: run host gpu path/to/experiment.py
+    if [[ $# -ne 3 ]]; then
+        echo "Usage: run host gpu path/to/experiment.py"
+        return 1
+    fi
+
+    local HOST="$1"
+    local DEVICE="$2"
+    local SCRIPT="$3"
+
+    git fetch --quiet
+
+    if ! git diff-index --quiet HEAD --; then
+        echo "ERROR: uncommitted changes."
+        return 1
+    fi
+
+    if [ "$(git rev-parse @)" != "$(git rev-parse @{u})" ]; then
+        echo "ERROR: local branch does not match origin (not up-to-date or diverged)."
+        return 1
+    fi
+
+    local REVISION="$(git rev-parse --short HEAD)"
+    local MESSAGE="$(git show -s --format=%s)"
+    local DIR="${PWD##*/}"
+    ssh -A -q "$HOST" << EOF
+set -ex
+cd ~/runners/${DIR}
+git fetch
+git checkout ${REVISION}
+source .venv/bin/activate
+pip install ".[dev]"
+mkdir -p runs/${REVISION}
+export DIR=${DIR}
+export DEVICE=${DEVICE}
+tmux new-session -d -s "${DIR}-${REVISION}" '
+    export REVISION=${REVISION}
+    export MESSAGE="${MESSAGE}"
+    export HOST=${HOST}
+    export SCRIPT=${SCRIPT}
+    CUDA_VISIBLE_DEVICES=${DEVICE} python ${SCRIPT} 2>&1 | tee runs/${REVISION}/output.log 
+'
+sleep 1
+tail -f runs/${REVISION}/output.log
+EOF
+}
+
 function run {
     #usage: run host gpu path/to/experiment.py
     if [[ $# -ne 3 ]]; then
