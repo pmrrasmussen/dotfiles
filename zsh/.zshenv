@@ -1,8 +1,8 @@
 export ZDOTDIR="$HOME/dotfiles/zsh"
 
 
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000

@@ -7,52 +7,33 @@ return {
   },
   {
     "folke/snacks.nvim",
-    keys = {
-      {
-        "<leader>e",
-        (function()
-          local previous_buffer = nil
-          local previous_window = nil
+    opts = function(_, opts)
+      opts.picker = opts.picker or {}
+      opts.picker.sources = opts.picker.sources or {}
+      opts.picker.sources.files = opts.picker.sources.files or {}
+      opts.picker.sources.files.follow = true
 
-          return function()
-            local explorer_pickers = Snacks.picker.get({ source = "explorer" })
-            if #explorer_pickers == 0 then
-              previous_buffer = vim.api.nvim_get_current_buf()
-              previous_window = vim.api.nvim_get_current_win()
-              Snacks.picker.explorer()
-            elseif explorer_pickers[1]:is_focused() then
-              if
-                previous_buffer
-                and vim.api.nvim_buf_is_valid(previous_buffer)
-                and previous_window
-                and vim.api.nvim_win_is_valid(previous_window)
-              then
-                vim.api.nvim_set_current_win(previous_window)
-                vim.api.nvim_win_set_buf(previous_window, previous_buffer)
-              end
-            else
-              previous_buffer = vim.api.nvim_get_current_buf()
-              previous_window = vim.api.nvim_get_current_win()
-              explorer_pickers[1]:focus()
-            end
-          end
-        end)(),
-        desc = "Toggle Snacks Explorer",
-      },
-      {
-        "<leader>\\",
+      local explorer = opts.picker.sources.explorer or {}
+      explorer.win = explorer.win or {}
+      explorer.win.list = explorer.win.list or {}
+      explorer.win.list.keys = explorer.win.list.keys or {}
+      explorer.win.list.keys["<C-l>"] = {
         function()
-          Snacks.explorer()
+          -- move focus to the window right of the explorer without closing it
+          vim.cmd("wincmd l")
         end,
-        desc = "File Explorer",
-      },
-    },
+        mode = { "n", "i" },
+        desc = "Focus window right of explorer",
+      }
+      opts.picker.sources.explorer = explorer
+    end,
+  },
+  {
+    "folke/flash.nvim",
     opts = {
-      picker = {
-        sources = {
-          files = {
-            follow = true,
-          },
+      modes = {
+        search = {
+          enabled = true,
         },
       },
     },
@@ -61,35 +42,18 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyright = {
-          settings = {
-            pyright = {
-              disableOrganizeImportsOnSave = false,
-              disableOrganizeImports = false,
-              useLibraryCodeForTypes = false,
-              openFilesOnly = true,
-            },
-            python = {
-              analysis = {
-                typeCheckingMode = "basic", -- change to "strict" if you want stricter checks
-                autoSearchPaths = true,
-                exclude = {
-                  "**/build",
-                  "**/dist",
-                  "**/__pycache__",
-                  "**/.venv",
-                  "**/venv",
-                  "**/.mypy_cache",
-                  "**/.pytest_cache",
-                  "**/wandb",
-                  "**.egg-info",
-                  "**/site-packages",
-                },
-              },
-            },
-          },
-        },
+        pyrefly = {},
       },
+      diagnostics = { virtual_text = false },
     },
+  },
+  {
+    "mason-org/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      if not vim.tbl_contains(opts.ensure_installed, "pyrefly") then
+        table.insert(opts.ensure_installed, "pyrefly")
+      end
+    end,
   },
 }
