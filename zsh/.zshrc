@@ -34,6 +34,7 @@ alias cmt="cmake --build build --target "
 alias cm="cmake --build --preset=Default"
 alias cf="cmake -D FIX=YES -D FORMAT_COMMAND=clang-format-21 -P cmake/lint.cmake"
 alias cu="./tools/check_include_what_you_use.sh"
+alias setup-ssh="sudo sh ~/dotfiles/scripts/start_tailscale.sh; sh ~/dotfiles/scripts/setup_ssh_agent.sh"
 
 alias gpp="g++-13"
 
@@ -128,7 +129,7 @@ cd ~/runners/${DIR}
 git fetch
 git checkout ${REVISION}
 source .venv/bin/activate
-pip install ".[dev]"
+uv pip install ".[dev]"
 mkdir -p runs/${REVISION}
 export DIR=${DIR}
 export DEVICE=${DEVICE}
@@ -176,7 +177,7 @@ cd ~/runners/${DIR}
 git fetch
 git checkout ${REVISION}
 source .venv/bin/activate
-pip install ".[dev]"
+uv pip install ".[dev]"
 mkdir -p runs/${REVISION}
 export DIR=${DIR}
 export DEVICE=${DEVICE}
@@ -191,4 +192,5 @@ sleep 1
 tail -f runs/${REVISION}/output.log
 EOF
 }
+
 
