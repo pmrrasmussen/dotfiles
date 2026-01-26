@@ -129,7 +129,7 @@ cd ~/runners/${DIR}
 git fetch
 git checkout ${REVISION}
 source .venv/bin/activate
-pip install ".[dev]"
+uv pip install ".[dev]"
 mkdir -p runs/${REVISION}
 export DIR=${DIR}
 export DEVICE=${DEVICE}
@@ -177,7 +177,7 @@ cd ~/runners/${DIR}
 git fetch
 git checkout ${REVISION}
 source .venv/bin/activate
-pip install ".[dev]"
+uv pip install ".[dev]"
 mkdir -p runs/${REVISION}
 export DIR=${DIR}
 export DEVICE=${DEVICE}
