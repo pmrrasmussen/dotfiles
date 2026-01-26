@@ -7,7 +7,7 @@ return {
       vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
       vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
       vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
-      vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
+      vim.keymae.set("n", "<C-l>", require("smart-splits").move_cursor_right)
     end,
   },
   {
@@ -60,7 +60,7 @@ return {
           },
           -- How the repl window will be displayed
           -- See below for more information
-          repl_open_cmd = require("iron.view").bottom(20),
+          repl_open_cmd = require("iron.view").right(80),
         },
         -- Iron doesn't set keymaps by default anymore.
         -- You can set them here or manually add keymaps to the functions in iron.core

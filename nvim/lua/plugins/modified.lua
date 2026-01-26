@@ -42,7 +42,37 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyrefly = {},
+        pyrefly = {
+          displayTypeErrors = "force-on",
+          disableLanguageServices = false,
+          analysis = {
+            diagnosticMode = "workspace",
+            importFormat = "absolute",
+            inlayHints = {
+              callArgumentNames = "on",
+              functionReturnTypes = true,
+              pytestParameters = false,
+              variableTypes = true,
+            },
+            showHoverGoToLinks = true,
+          },
+          disabledLanguageServices = {
+            definition = false,
+            declaration = false,
+            typeDefinition = false,
+            codeAction = false,
+            completion = false,
+            documentHighlight = false,
+            references = false,
+            rename = false,
+            signatureHelp = false,
+            hover = false,
+            inlayHint = false,
+            documentSymbol = false,
+            semanticTokens = false,
+            implementation = false,
+          },
+        },
       },
       diagnostics = { virtual_text = false },
     },
