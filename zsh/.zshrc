@@ -138,7 +138,7 @@ tmux new-session -d -s "${DIR}-${REVISION}" '
     export MESSAGE="${MESSAGE}"
     export HOST=${HOST}
     export SCRIPT=${SCRIPT}
-    CUDA_VISIBLE_DEVICES=${DEVICE} python ${SCRIPT} 2>&1 | tee runs/${REVISION}/output.log 
+    CUDA_VISIBLE_DEVICES=${DEVICE} PYTHONPATH=. python ${SCRIPT} 2>&1 | tee runs/${REVISION}/output.log 
 '
 sleep 1
 tail -f runs/${REVISION}/output.log
