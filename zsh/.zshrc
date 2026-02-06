@@ -35,6 +35,8 @@ alias cm="cmake --build --preset=Default"
 alias cf="cmake -D FIX=YES -D FORMAT_COMMAND=clang-format-21 -P cmake/lint.cmake"
 alias cu="./tools/check_include_what_you_use.sh"
 alias setup-ssh="sudo sh ~/dotfiles/scripts/start_tailscale.sh; sh ~/dotfiles/scripts/setup_ssh_agent.sh"
+alias set-models-data-dir="export TWIG_BASE_DATA_DIR=/mnt/nvmeu2_2/data"
+alias set-epex-data-dir='export TWIG_BASE_DATA_DIR="$HOME/EPEXcpp/EPEX/tests/data"'
 
 alias gpp="g++-13"
 

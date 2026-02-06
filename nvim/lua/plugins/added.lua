@@ -72,6 +72,11 @@ return {
           exit = "<leader>rq",
           clear = "<leader>cl",
         },
+        python = {
+          command = { "jupyter-console", "--ZMQTerminalInteractiveShell.image_handler=None" },
+          format = require("iron.fts.common").bracketed_paste,
+          block_deviders = { "# %%", "#%%" },
+        },
         -- If the highlight is on, you can change how it looks
         -- For the available options, check nvim_set_hl
         highlight = {
