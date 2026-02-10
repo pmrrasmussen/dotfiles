@@ -36,39 +36,44 @@ return {
     opts = {
       servers = {
         pyrefly = {
-          displayTypeErrors = "force-on",
-          disableLanguageServices = false,
-          analysis = {
-            diagnosticMode = "workspace",
-            importFormat = "absolute",
-            inlayHints = {
-              callArgumentNames = "on",
-              functionReturnTypes = true,
-              pytestParameters = false,
-              variableTypes = true,
+          init_options = {
+            pyrefly = {
+              displayTypeErrors = "default",
+              disableLanguageServices = false,
+              analysis = {
+                diagnosticMode = "workspace",
+                importFormat = "absolute",
+                inlayHints = {
+                  callArgumentNames = "on",
+                  functionReturnTypes = true,
+                  pytestParameters = true,
+                  variableTypes = true,
+                },
+                showHoverGoToLinks = true,
+              },
+              disabledLanguageServices = {
+                definition = false,
+                declaration = false,
+                typeDefinition = false,
+                codeAction = false,
+                completion = false,
+                documentHighlight = false,
+                references = false,
+                rename = false,
+                signatureHelp = false,
+                hover = false,
+                inlayHint = false,
+                documentSymbol = false,
+                semanticTokens = false,
+                implementation = false,
+              },
             },
-            showHoverGoToLinks = true,
-          },
-          disabledLanguageServices = {
-            definition = false,
-            declaration = false,
-            typeDefinition = false,
-            codeAction = false,
-            completion = false,
-            documentHighlight = false,
-            references = false,
-            rename = false,
-            signatureHelp = false,
-            hover = false,
-            inlayHint = false,
-            documentSymbol = false,
-            semanticTokens = false,
-            implementation = false,
           },
         },
       },
-      -- diagnostics = { virtual_text = false },
-      inlay_hints = { enabled = false }, -- default OFF
+
+      -- client-side: force inlay hints off regardless of server
+      inlay_hints = { enabled = false },
     },
   },
   {
