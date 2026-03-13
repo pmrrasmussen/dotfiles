@@ -100,9 +100,9 @@ fi
 # _comp_options+=(globdots)
 
 function prun {
-    #usage: run host gpu path/to/experiment.py
+    # usage: prun host gpu path/to/experiment.py
     if [[ $# -ne 3 ]]; then
-        echo "Usage: run host gpu path/to/experiment.py"
+        echo "Usage: prun host gpu path/to/experiment.py"
         return 1
     fi
 
@@ -117,33 +117,67 @@ function prun {
         return 1
     fi
 
+    if ! git rev-parse --abbrev-ref '@{u}' >/dev/null 2>&1; then
+        echo "ERROR: no upstream branch configured."
+        return 1
+    fi
+
     if [ "$(git rev-parse @)" != "$(git rev-parse @{u})" ]; then
         echo "ERROR: local branch does not match origin (not up-to-date or diverged)."
         return 1
     fi
 
-    local REVISION="$(git rev-parse --short HEAD)"
-    local MESSAGE="$(git show -s --format=%s)"
-    local DIR="${PWD##*/}"
-    ssh -A -q "$HOST" << EOF
-set -ex
-cd ~/runners/${DIR}
+    local REVISION
+    REVISION="$(git rev-parse --short HEAD)"
+
+    local MESSAGE
+    MESSAGE="$(git show -s --format=%s HEAD)"
+
+    local DIR
+    DIR="${PWD##*/}"
+
+    local REPO_URL
+    REPO_URL="$(git remote get-url origin)"
+
+    ssh -A -q "$HOST" \
+        DIR="$DIR" \
+        DEVICE="$DEVICE" \
+        SCRIPT="$SCRIPT" \
+        REVISION="$REVISION" \
+        MESSAGE="$MESSAGE" \
+        REPO_URL="$REPO_URL" \
+        HOST_NAME="$HOST" \
+        'bash -s' <<'EOF'
+set -euxo pipefail
+
+RUN_DIR="$HOME/runners/$DIR/$DEVICE"
+
+if [[ ! -d "$RUN_DIR/.git" ]]; then
+    mkdir -p "$(dirname "$RUN_DIR")"
+    git clone "$REPO_URL" "$RUN_DIR"
+fi
+
+cd "$RUN_DIR"
 git fetch
-git checkout ${REVISION}
-source .venv/bin/activate
-uv pip install ".[dev]"
-mkdir -p runs/${REVISION}
-export DIR=${DIR}
-export DEVICE=${DEVICE}
-tmux new-session -d -s "${DIR}-${REVISION}" '
-    export REVISION=${REVISION}
-    export MESSAGE="${MESSAGE}"
-    export HOST=${HOST}
-    export SCRIPT=${SCRIPT}
-    CUDA_VISIBLE_DEVICES=${DEVICE} PYTHONPATH=. python ${SCRIPT} 2>&1 | tee runs/${REVISION}/output.log 
-'
+git checkout "$REVISION"
+
+uv sync --all-groups
+
+mkdir -p "runs/$REVISION"
+touch "runs/$REVISION/output.log"
+
+ulimit -n 1000000
+tmux new-session -d -s "${DIR}-${DEVICE}-${REVISION}" -c "$RUN_DIR" "
+    export REVISION=$(printf '%q' "$REVISION")
+    export MESSAGE=$(printf '%q' "$MESSAGE")
+    export HOST=$(printf '%q' "$HOST_NAME")
+    export SCRIPT=$(printf '%q' "$SCRIPT")
+    export CUDA_VISIBLE_DEVICES=$(printf '%q' "$DEVICE")
+    uv run python -u $(printf '%q' "$SCRIPT") 2>&1 | tee -a runs/$REVISION/output.log
+"
+
 sleep 1
-tail -f runs/${REVISION}/output.log
+tail -n +1 -F "$RUN_DIR/runs/$REVISION/output.log"
 EOF
 }
 
@@ -179,10 +213,11 @@ cd ~/runners/${DIR}
 git fetch
 git checkout ${REVISION}
 source .venv/bin/activate
-uv pip install ".[dev]"
+uv sync --all-groups
 mkdir -p runs/${REVISION}
 export DIR=${DIR}
 export DEVICE=${DEVICE}
+ulimit -n 1000000
 tmux new-session -d -s "${DIR}-${REVISION}" '
     export REVISION=${REVISION}
     export MESSAGE="${MESSAGE}"
