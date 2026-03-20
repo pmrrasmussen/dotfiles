@@ -18,7 +18,11 @@ decorations = "None"
 bindings = [
     { key = "Insert", mods = "Shift", action = "Paste" },
     { key = "Insert", mods = "Control", action = "Copy" },
+  { key = "Return", mods = "Shift", chars = "\u001B\r" },
 ]
 
 [terminal.shell]
 program = "/usr/bin/zsh"
+
+[terminal]
+osc52 = "CopyPaste"
