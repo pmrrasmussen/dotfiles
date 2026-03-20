@@ -154,6 +154,8 @@ set -euxo pipefail
 
 RUN_DIR="$HOME/runners/$DIR/$DEVICE"
 
+mkdir -p "$RUN_DIR"
+
 if [[ ! -d "$RUN_DIR/.git" ]]; then
     mkdir -p "$(dirname "$RUN_DIR")"
     git clone "$REPO_URL" "$RUN_DIR"
