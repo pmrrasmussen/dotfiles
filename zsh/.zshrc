@@ -20,6 +20,7 @@ alias ta="tmux a -t"
 alias tn="tmux new -s"
 alias ts="tmux list-sessions"
 alias tk="tmux kill-server"
+alias tt="bash ~/dotfiles/tmux/tmux-sessionizer.sh"
 
 # Unit testing with ctest
 alias ct='ctest --test-dir build --output-on-failure -R'
@@ -37,6 +38,7 @@ alias cu="./tools/check_include_what_you_use.sh"
 alias setup-ssh="sudo sh ~/dotfiles/scripts/start_tailscale.sh; sh ~/dotfiles/scripts/setup_ssh_agent.sh"
 alias set-models-data-dir="export TWIG_BASE_DATA_DIR=/mnt/nvmeu2_2/data"
 alias set-epex-data-dir='export TWIG_BASE_DATA_DIR="$HOME/EPEXcpp/EPEX/tests/data"'
+
 
 alias gpp="g++-13"
 
@@ -166,8 +168,8 @@ uv sync --all-groups
 mkdir -p "runs/$REVISION"
 touch "runs/$REVISION/output.log"
 
-ulimit -n 1000000
 tmux new-session -d -s "${DIR}-${DEVICE}-${REVISION}" -c "$RUN_DIR" "
+    ulimit -n 1000000
     export REVISION=$(printf '%q' "$REVISION")
     export MESSAGE=$(printf '%q' "$MESSAGE")
     export HOST=$(printf '%q' "$HOST_NAME")
