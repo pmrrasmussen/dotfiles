@@ -16,6 +16,7 @@ alias k="kubectl"
 alias kn="kubens"
 alias kc="kubectx"
 
+# TMUX 
 alias ta="tmux a -t"
 alias tn="tmux new -s"
 alias ts="tmux list-sessions"
